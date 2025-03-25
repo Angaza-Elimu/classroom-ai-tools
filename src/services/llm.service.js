@@ -19,7 +19,7 @@ class LLMService {
             const response = await this.openai.completions.create({
                 model: 'gpt-3.5-turbo-instruct',
                 prompt: cleaned,
-                max_tokens: 400,
+                max_tokens: 900,
                 n: 1,
                 stop: null,
                 temperature: 0.7,

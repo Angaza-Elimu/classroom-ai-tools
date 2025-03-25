@@ -8,7 +8,7 @@ class VectorService {
       await client.connect();
       await client.query("BEGIN");
       const insertQuery =
-        "INSERT INTO vectors (userId, filePath, vectors) VALUES ($1, $2, $3) RETURNING *";
+        "INSERT INTO vectors_units (userId, filePath, vectors) VALUES ($1, $2, $3) RETURNING *";
       console.log(Array.isArray(embeddings));
       console.log("Inserting vectors into database:", embeddings);
       const promises = await client.query(insertQuery, [
@@ -35,7 +35,7 @@ class VectorService {
       const result = await client.query(
         `
             SELECT id, vectors, filePath, vectors <-> $1 AS distance
-            FROM vectors
+            FROM vectors_units
             ORDER BY distance
             LIMIT 5;
             `,

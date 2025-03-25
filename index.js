@@ -19,7 +19,7 @@ app.get('/', (req, res) => {
 });
 
 // Step 7: Start the server
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3052;
 
 // Check mongoose connection
 mongoose.connect('mongodb://localhost:27017/intervention-builder', {
@@ -36,10 +36,10 @@ global.mongoClient = mongoose.connection;
 
 // check pgsql connection
 const pgClient = new Pool({
-  user: 'angaza',
+  user: 'postgres',
   host: 'localhost',
-  database: 'intervention_builder',
-  password: 'angaza',
+  database: 'angaza',
+  password: '2MAKSgQKfFc2gh9KiqRK',
   port: 5432,
 });
 

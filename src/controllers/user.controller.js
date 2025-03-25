@@ -33,7 +33,7 @@ class UserController {
             const vectorInsert = await vectorService.insertVectorsIntoDatabase(userId, req.file.path, vectorizedUserInfo.embeddings);
             // add tags to the user info
             console.log(vectorInsert);
-            const similarUnits = await vectorService.findSimilarUnits(vectorizedUserInfo.embeddings, vectorInsert);
+            // const similarUnits = await vectorService.findSimilarUnits(vectorizedUserInfo.embeddings, vectorInsert);
             // write unit ti
             const result = await (userId, vectorizedUserInfo);
 
@@ -63,7 +63,7 @@ class UserController {
                 throw new Error('No valid file path found in the result');
             }
             if (pdfText) {
-                const llmService = new LLMService(process.env.OPENAI_API_KEY);
+                const llmService = new LLMService(process.env.OPEN_AI_KEY);
                 const prompt = `You are an educational assistant that can generate any of the following according to the query, - answers, lesson plans for teachers, quizzes for students and creates activities for students while creating new content similar to the context Here is a document with the curriculum: ${pdfText.text}, Come up with new creative items from the query: ${query}`;
                 console.log("Prompt", prompt);
                 const output = await llmService.generateOutput(prompt);
