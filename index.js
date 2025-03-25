@@ -39,7 +39,7 @@ const pgClient = new Pool({
   user: 'postgres',
   host: 'localhost',
   database: 'angaza',
-  password: '2MAKSgQKfFc2gh9KiqRK',
+  password: '',
   port: 5432,
 });
 
