@@ -106,7 +106,7 @@ class PDFService {
         const filePath = `generated/file-${timestamp}.pdf`;
         fs.writeFileSync(filePath, pdfBytes);
         
-        return `http://localhost:3000/${filePath}`;
+        return `http://classroom-ai.kalamu.net/${filePath}`;
     }
 }
 

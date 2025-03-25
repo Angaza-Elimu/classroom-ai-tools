@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const { Pool } = require('pg'); // For PostgreSQL
 // Step 2: Require the cors module
 const cors = require('cors');
+const path = require('path');
 // Step 3: Create an instance of Express
 const app = express();
 
@@ -13,6 +14,22 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use(cors());
+
+// Serve static files from 'generated' directory
+app.use('/generated', express.static(path.join(__dirname, 'generated')));
+
+// Serve static files from 'uploads' directory
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
+// Handle 404s for static files
+app.use('/generated', (req, res) => {
+    res.status(404).json({ error: 'File not found' });
+});
+
+app.use('/uploads', (req, res) => {
+    res.status(404).json({ error: 'File not found' });
+});
+
 // Step 6: Set up a basic route
 app.get('/', (req, res) => {
   res.send('Hello, world!');
