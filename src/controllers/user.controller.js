@@ -64,7 +64,17 @@ class UserController {
             }
             if (pdfText) {
                 const llmService = new LLMService(process.env.OPEN_AI_KEY);
-                const prompt = `You are an educational assistant that can generate any of the following according to the query, - answers, lesson plans for teachers, quizzes for students and creates activities for students while creating new content similar to the context Here is a document with the curriculum: ${pdfText.text}, Come up with new creative items from the query: ${query}`;
+                // const prompt = `You are an educational assistant that can generate any of the following according to the query, - answers, lesson plans for teachers, quizzes for students and creates activities for students while creating new content similar to the context Here is a document with the curriculum: ${pdfText.text}, Come up with new creative items from the query: ${query}`;
+                const prompt = `You are an educational assistant that can generate the following sections according to the query:
+                    - Specific Expected Learning Outcomes
+                    - Prior Knowledge
+                    - Vocabulary and concepts that will be used
+                    - Lesson Development Steps (activities that contain teacher actions)
+                    - Formative Assessment Descriptors (e.g Partially meets proficiency, Meets proficiency, Exceeds proficiency)
+                    - Common Misconceptions and Teacher Lookouts
+                    - Differentiated Learning (Support for struggling learners, Challenge for advanced learners)
+                    - Teacher's Self-Reflection
+                while creating new content similar to the context. Come up with new creative items from the subtopic: ${query}`;
                 console.log("Prompt", prompt);
                 const output = await llmService.generateOutput(prompt);
                 const pdfLink = await pdfRead.generatePDF(output);
